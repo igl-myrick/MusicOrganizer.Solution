@@ -4,6 +4,6 @@ namespace MusicOrganizer.Models
 {
   public class Record
   {
-    public string Title { get; }
+    public string Title { get; set; }
   }
 }
