@@ -21,5 +21,13 @@ namespace MusicOrganizer.Tests
       string title = newRecord.Title;
       Assert.AreEqual(title, newRecord.Title);
     }
+
+    public void SetTitle_SetsValueOfTitle_String()
+    {
+      Record newRecord = new Record();
+      string newTitle = "new title";
+      newRecord.Title = newTitle;
+      Assert.AreEqual(newTitle, newRecord.Title);
+    }
   }
 }
