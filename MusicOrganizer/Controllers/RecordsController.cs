@@ -32,5 +32,12 @@ namespace MusicOrganizer.Controllers
       Record.ClearAll();
       return View();
     }
+
+    [HttpGet("/records/{id}")]
+    public ActionResult Show(int id)
+    {
+      Record foundRecord = Record.Find(id);
+      return View(foundRecord);
+    }
   }
 }
