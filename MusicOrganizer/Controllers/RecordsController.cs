@@ -25,5 +25,12 @@ namespace MusicOrganizer.Controllers
       Record newRecord = new Record(title);
       return RedirectToAction("Index");
     }
+
+    [HttpPost("/records/delete")]
+    public ActionResult DeleteAll()
+    {
+      Record.ClearAll();
+      return View();
+    }
   }
 }
