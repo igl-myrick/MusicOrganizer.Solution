@@ -16,5 +16,10 @@ namespace MusicOrganizer.Models
       Id = _instances.Count;
       Records = new List<Record>{};
     }
+
+    public static void ClearAll()
+    {
+      _instances.Clear();
+    }
   }
 }
