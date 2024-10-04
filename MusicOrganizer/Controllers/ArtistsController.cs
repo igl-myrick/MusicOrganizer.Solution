@@ -3,7 +3,7 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 using MusicOrganizer.Models;
 
-namespace ToDoList.Controllers
+namespace MusicOrganizer.Controllers
 {
   public class ArtistsController : Controller
   {
@@ -26,6 +26,17 @@ namespace ToDoList.Controllers
     {
       Artist newArtist = new Artist(artistName);
       return RedirectToAction("Index");
+    }
+
+    [HttpGet("/artists/{id}")]
+    public ActionResult Show(int id)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Artist selectedArtist = Artist.Find(id);
+      List<Item> artistRecords = selectedArtist.Records;
+      model.Add("artist", selectedArtist);
+      model.Add("record", artistRecords);
+      return View(model);
     }
 
   }
