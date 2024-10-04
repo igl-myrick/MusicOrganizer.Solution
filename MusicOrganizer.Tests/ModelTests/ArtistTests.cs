@@ -60,5 +60,14 @@ namespace MusicOrganizer.Tests
 
       CollectionAssert.AreEqual(newList, result);
     }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectArtist_Artist()
+    {
+      Artist newArtist1 = new Artist("title 1");
+      Artist newArtist2 = new Artist("title 2");
+      Artist result = Artist.Find(2);
+      Assert.AreEqual(newArtist2, result);
+    }
   }
 }
