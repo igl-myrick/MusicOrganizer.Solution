@@ -21,5 +21,12 @@ namespace ToDoList.Controllers
       return View();
     }
 
+    [HttpPost("/artists")]
+    public ActionResult Create(string artistName)
+    {
+      Artist newArtist = new Artist(artistName);
+      return RedirectToAction("Index");
+    }
+
   }
 }
