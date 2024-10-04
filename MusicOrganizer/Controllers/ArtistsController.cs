@@ -15,5 +15,11 @@ namespace ToDoList.Controllers
       return View(allArtists);
     }
 
+    [HttpGet("/artists/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
+
   }
 }
