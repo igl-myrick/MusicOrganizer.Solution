@@ -6,13 +6,6 @@ namespace MusicOrganizer.Controllers
 {
   public class RecordsController : Controller
   {
-    [HttpGet("/records")]
-    public ActionResult Index()
-    {
-      List<Record> allRecords = Record.GetAll();
-      return View(allRecords);
-    }
-
     [HttpGet("/records/new")]
     public ActionResult New()
     {
