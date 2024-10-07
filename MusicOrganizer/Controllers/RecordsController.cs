@@ -26,11 +26,15 @@ namespace MusicOrganizer.Controllers
       return View();
     }
 
-    [HttpGet("/records/{id}")]
-    public ActionResult Show(int id)
+    [HttpGet("/artists/{artistId}/records/{recordId}")]
+    public ActionResult Show(int artistId, int recordId)
     {
-      Record foundRecord = Record.Find(id);
-      return View(foundRecord);
+      Record foundRecord = Record.Find(recordId);
+      Artist foundArtist = Artist.Find(artistId);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("record", foundRecord);
+      model.Add("artist", foundArtist);
+      return View(model);
     }
   }
 }
