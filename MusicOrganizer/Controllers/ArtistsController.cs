@@ -33,7 +33,7 @@ namespace MusicOrganizer.Controllers
     {
       Dictionary<string, object> model = new Dictionary<string, object>();
       Artist selectedArtist = Artist.Find(id);
-      List<Item> artistRecords = selectedArtist.Records;
+      List<Record> artistRecords = selectedArtist.Records;
       model.Add("artist", selectedArtist);
       model.Add("record", artistRecords);
       return View(model);
