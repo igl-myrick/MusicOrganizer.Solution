@@ -3,4 +3,8 @@
 }
 
 <h1>Record Details</h1>
-<h2>Title: @Model.Title</h2>
+<h2>Title: @Model["record"].Title</h2>
+<h2>Artist: @Model["artist"].Name</h2>
+
+<a href='/artists/@Model["artist"].Id/records/new'>Add a new record by @Model["artist"]</a>
+<a href="/artists">View all artists</a>
