@@ -6,10 +6,11 @@ namespace MusicOrganizer.Controllers
 {
   public class RecordsController : Controller
   {
-    [HttpGet("/records/new")]
-    public ActionResult New()
+    [HttpGet("artists/{artistId}/records/new")]
+    public ActionResult New(int artistId)
     {
-      return View();
+      Artist artist = Artist.Find(artistId);
+      return View(artist);
     }
 
     [HttpPost("/records")]
