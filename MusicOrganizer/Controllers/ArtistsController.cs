@@ -35,7 +35,7 @@ namespace MusicOrganizer.Controllers
       Artist selectedArtist = Artist.Find(id);
       List<Record> artistRecords = selectedArtist.Records;
       model.Add("artist", selectedArtist);
-      model.Add("record", artistRecords);
+      model.Add("records", artistRecords);
       return View(model);
     }
 
