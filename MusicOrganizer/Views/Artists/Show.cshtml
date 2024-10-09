@@ -4,10 +4,10 @@
 
 @using MusicOrganizer.Models;
 
-<h3>Records by @Model.Artist:</h3>
+<h3>Records by this artist:</h3>
 
 <ol>
-  @foreach (Record record in @Model["records"])
+  @foreach (Record record in Model["records"])
   {
     <li><a href='/artists/@Model["artist"].Id/records/@record.Id'>@record.Title</a></li>
   }
