@@ -52,5 +52,33 @@ namespace MusicOrganizer.Controllers
       return View("Show", model);
     }
 
+    [HttpGet("/artists/search")]
+    public ActionResult Search(string searchQuery = "")
+    {
+      List<Artist> allArtists = Artist.GetAll();
+      if (searchQuery == "")
+      {
+        return View(allArtists);
+      }
+      else
+      {
+        List<Artist> searchResults = new List<Artist> {};
+        foreach (Artist artist in allArtists)
+        {
+          if (artist.Name.Contains(searchQuery))
+          {
+            searchResults.Add(artist);
+          }
+        }
+        return View(searchResults);
+      }
+    }
+
+    [HttpPost("/artists/search")]
+    public ActionResult Display(string searchStr)
+    {
+      return RedirectToAction("Search", new { searchQuery = searchStr });
+    }
+
   }
 }
