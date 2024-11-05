@@ -1,4 +1,4 @@
-namespace MusicOrganizer.Models;
+namespace MusicOrganizer.Models
 {
   public static class DBConfiguration
   {
