@@ -8,9 +8,19 @@ namespace MusicOrganizer.Tests
   [TestClass]
   public class RecordTests : IDisposable
   {
+    public IConfiguration Configuration { get; set; }
+
     public void Dispose()
     {
       Record.ClearAll();
+    }
+
+    public RecordTests()
+    {
+      IConfigurationBuilder builder = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json");
+      Configuration = builder.Build();
+      DBConfiguration.ConnectionString = Configuration["ConnectionStrings:TestConnection"];
     }
     
     [TestMethod]
@@ -43,7 +53,9 @@ namespace MusicOrganizer.Tests
     public void GetAll_ReturnsRecords_RecordList()
     {
       Record newRecord1 = new Record("Title 1");
+      newRecord1.Save();
       Record newRecord2 = new Record("Title 2");
+      newRecord2.Save();
       List<Record> newList = new List<Record> { newRecord1, newRecord2 };
 
       List<Record> result = Record.GetAll();
@@ -67,6 +79,16 @@ namespace MusicOrganizer.Tests
       Record newRecord2 = new Record("Title 2");
       Record result = Record.Find(2);
       Assert.AreEqual(newRecord2, result);
+    }
+
+    [TestMethod]
+    public void Save_SavesToDatabase_RecordList()
+    {
+      Record testRecord = new Record("title");
+      testRecord.Save();
+      List<Record> result = Record.GetAll();
+      List<Record> testList = new List<Record> {testRecord};
+      CollectionAssert.AreEqual(testRecord, result);
     }
   }
 }
