@@ -76,7 +76,10 @@ namespace MusicOrganizer.Tests
     public void Find_ReturnsCorrectRecord_Record()
     {
       Record newRecord1 = new Record("Title 1");
+      newRecord1.Save();
       Record newRecord2 = new Record("Title 2");
+      newRecord2.Save();
+      
       Record result = Record.Find(2);
       Assert.AreEqual(newRecord2, result);
     }
