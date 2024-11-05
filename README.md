@@ -9,6 +9,7 @@
 * _C#_
 * _.NET_
 * _MSTest_
+* _MySQL_
 
 ## Description
 
@@ -16,7 +17,7 @@ _A website where a user can keep track of their physical music. It functions lik
 
 ## Setup/Installation Requirements
 
-* _You will need .NET (`https://dotnet.microsoft.com/en-us/download/dotnet/6.0`) to run the program._
+* _You will need .NET (`https://dotnet.microsoft.com/en-us/download/dotnet/6.0`) and MySQL (`https://downloads.mysql.com/archives/get/p/25/file/mysql-installer-web-community-8.0.19.0.msi`) in order to run the program._
 
 _1: Clone the repository to a folder of choice on your machine (by either using the "Code" button on the GitHub page, or in a terminal application using `git clone https://github.com/igl-myrick/MusicOrganizer.Solution`)._
 
@@ -29,6 +30,18 @@ _4: Once the program is built, run `dotnet run` to start the program._
 _5: When the program is running, navigate to `https://localhost:5001` to view and use the website._
 
 _6: Optionally, to view tests, enter the `MusicOrganizer.Tests` folder from the top level, run `dotnet restore` to install MSTest packages, and `dotnet test` to run tests._
+
+* _Additionally, you will need to create an `appsettings.json` file within the `MusicOrganizer` folder, including the following code:_
+
+```
+{
+    "ConnectionStrings": {
+        "DefaultConnection": "Server=localhost;Port=3306;database=music_organizer;uid=[YOUR-USERNAME-HERE];pwd=[YOUR-PASSWORD-HERE];"
+    }
+}
+```
+
+_You will need to insert your own MySQL username in place of `[YOUR-USERNAME-HERE]` and MySQL password in place of `[YOUR-PASSWORD-HERE]`._
 
 ## Known Bugs
 
