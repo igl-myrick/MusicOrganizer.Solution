@@ -8,6 +8,11 @@ namespace MusicOrganizer.Models
     public string Title { get; set; }
     public int Id { get; set; }
 
+    public Record(string title)
+    {
+      Title = title;
+    }
+
     public Record(string title, int id)
     {
       Title = title;
@@ -41,7 +46,7 @@ namespace MusicOrganizer.Models
       MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
       conn.Open();
 
-      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
       cmd.CommandText = "SELECT * FROM records;";
 
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
@@ -78,8 +83,32 @@ namespace MusicOrganizer.Models
 
     public static Record Find(int searchId)
     {
-      Record placeholderRecord = new Record("placeholder record");
-      return placeholderRecord;
+      MySqlConnection conn = new MySqlConnection(DBConfiguration.ConnectionString);
+      conn.Open();
+
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = "SELECT * FROM records WHERE id = @ThisId;";
+      MySqlParameter param = new MySqlParameter();
+      param.ParameterName = "@ThisId";
+      param.Value = searchId;
+      cmd.Parameters.Add(param);
+
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      int recordId = 0;
+      string recordTitle = "";
+      while (rdr.Read())
+      {
+        recordId = rdr.GetInt32(0);
+        recordTitle = rdr.GetString(1);
+      }
+      Record foundRecord = new Record(recordTitle, recordId);
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return foundRecord;
     }
 
     public void Save()
