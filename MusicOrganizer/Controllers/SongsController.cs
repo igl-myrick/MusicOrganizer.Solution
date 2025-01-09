@@ -45,5 +45,15 @@ namespace MusicOrganizer.Controllers
         return RedirectToAction("Index");
       }
     }
+
+    public ActionResult Details(int id)
+    {
+      Song thisSong = _db.Songs
+        .Include(song => song.Album)
+        .Include(song => song.JoinEntities)
+        .ThenInclude(join => join.Artist)
+        .FirstOrDefault(song => song.SongId == id);
+      return View(thisSong);
+    }
   }
 }
