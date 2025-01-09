@@ -23,5 +23,27 @@ namespace MusicOrganizer.Controllers
         .ToList();
       return View(model);
     }
+
+    public ActionResult Create()
+    {
+      ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Title");
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Song song)
+    {
+      if (!ModelState.IsValid)
+      {
+        ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Title");
+        return View(song);
+      }
+      else
+      {
+        _db.Songs.Add(song);
+        _db.SaveChanges();
+        return RedirectToAction("Index");
+      }
+    }
   }
 }
