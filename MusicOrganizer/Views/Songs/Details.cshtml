@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+@using MusicOrganizer.Models
+@model MusicOrganizer.Models.Song
+
+<h2>Song Details</h2>
+<hr>
+<h3>@Html.DisplayNameFor(model => model.Title): @Html.DisplayFor(model => model.Title)</h3>
+<h3>@Html.DisplayNameFor(model => model.Album): @Html.DisplayFor(model => model.Album.Title)</h3>
+
+@if (Model.JoinEntities.Count == 0)
+{
+  <p>This song does not have any artists added yet.</p>
+}
+else
+{
+  <h4>Artists of this song:</h4>
+  <ul>
+    @foreach (ArtistSong join in Model.JoinEntities)
+    {
+      <li>@join.Artist.Name</li>
+      @using (Html.BeginForm("DeleteJoin", "Songs"))
+      {
+        @Html.Hidden("joinId", @join.ArtistSongId)
+        <input type="submit" value="Delete">
+      }
+    }
+  </ul>
+}
+
+<p>@Html.ActionLink("Back to songs", "Index")</p>
+<p>@Html.ActionLink("Edit song", "Edit", new { id = Model.SongId })</p>
+<p>@Html.ActionLink("Add an artist", "AddArtist", new { id = Model.SongId })</p>
+<p>@Html.ActionLink("Delete song", "Delete", new { id = Model.SongId })</p>
