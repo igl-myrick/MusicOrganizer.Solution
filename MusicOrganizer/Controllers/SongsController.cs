@@ -55,5 +55,20 @@ namespace MusicOrganizer.Controllers
         .FirstOrDefault(song => song.SongId == id);
       return View(thisSong);
     }
+
+    public ActionResult Edit(int id)
+    {
+      Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == id);
+      ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Title");
+      return View(thisSong);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Song song)
+    {
+      _db.Songs.Update(song);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
