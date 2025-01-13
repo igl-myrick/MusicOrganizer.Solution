@@ -1,0 +1,24 @@
+@{
+  Layout = "_Layout";
+}
+
+@model MusicOrganizer.Models.Song
+
+<h2>Edit</h2>
+
+<h4>Edit this song's info:</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.SongId)
+  
+  @Html.LabelFor(model => model.Title)
+  @Html.EditorFor(model => model.Title)
+
+  @Html.LabelFor(model => model.Album)
+  @Html.DropDownList("AlbumId")
+
+  <input type="submit" value="Save">
+}
+
+<p>@Html.ActionLink("Back to songs", "Index")</p>
