@@ -13,9 +13,8 @@
 
 @foreach (Artist artist in Model)
 {
-  <h3><a href="/artists/@artist.Id">@artist.Name</a></h3>
+  <li>@Html.ActionLink($"{artist.Name}", "Details", new { id = artist.ArtistId })</li>
 }
 
-<p><a href="/artists/new">Add another artist</a></p>
-<p><a href="/artists/search">Search artists</a></p>
-<p><a href="/">Back home</a></p>
+<p>@Html.ActionLink("Add new artist", "Create")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
