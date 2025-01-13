@@ -20,5 +20,14 @@ namespace MusicOrganizer.Controllers
     {
       return View(_db.Artists.ToList());
     }
+
+    public ActionResult Details(int id)
+    {
+      Artist thisArtist = _db.Artists
+        .Include(artist => artist.JoinEntities)
+        .ThenInclude(join => join.Song)
+        .FirstOrDefault(artist => artist.ArtistId == id);
+      return View(thisArtist);
+    }
   }
 }
