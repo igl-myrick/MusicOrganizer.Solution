@@ -85,5 +85,26 @@ namespace MusicOrganizer.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult AddArtist(int id)
+    {
+      Song thisSong = _db.Songs.FirstOrDefault(song => song.SongId == id);
+      ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
+      return View(thisSong);
+    }
+
+    [HttpPost]
+    public ActionResult AddArtist(Song song, int artistId)
+    {
+      #nullable enable
+      ArtistSong? joinEntity = _db.ArtistSongs.FirstOrDefault(join => (join.ArtistId == artistId && join.SongId == song.SongId));
+      #nullable disable
+      if (joinEntity == null && artistId != 0)
+      {
+        _db.ArtistSongs.Add(new ArtistSong() { ArtistId = artistId, SongId = song.SongId });
+        _db.SaveChanges();
+      }
+      return RedirectToAction("Details", new { id = song.SongId });
+    }
   }
 }
