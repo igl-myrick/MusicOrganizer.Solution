@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+
+@model ToDoList.Models.Artist
+
+<h2>Add a song</h2>
+
+<h4>Add a song to this artist: @Html.DisplayFor(model => model.Name)</h4>
+
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ArtistId)
+
+  @Html.Label("Select song")
+  @Html.DropDownList("SongId")
+
+  <input type="submit" value="Save">
+}
+
+<p>@Html.ActionLink("Back to artists", "Index")</p>
