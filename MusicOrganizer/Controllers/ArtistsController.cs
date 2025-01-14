@@ -29,5 +29,18 @@ namespace MusicOrganizer.Controllers
         .FirstOrDefault(artist => artist.ArtistId == id);
       return View(thisArtist);
     }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Artist artist)
+    {
+      _db.Artists.Add(artist);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
