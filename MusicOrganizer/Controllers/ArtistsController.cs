@@ -63,5 +63,19 @@ namespace MusicOrganizer.Controllers
       }
       return RedirectToAction("Details", new { id = artist.ArtistId });
     }
+
+    public ActionResult Edit(int id)
+    {
+      Artist thisArtist = _db.Artists.FirstOrDefault(artist => artist.ArtistId == id);
+      return View(thisArtist);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Artist artist)
+    {
+      _db.Artists.Update(artist);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
