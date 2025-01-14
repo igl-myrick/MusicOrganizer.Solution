@@ -92,5 +92,14 @@ namespace MusicOrganizer.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    [HttpPost]
+    public ActionResult DeleteJoin(int joinId)
+    {
+      ArtistSong joinEntry = _db.ArtistSongs.FirstOrDefault(entry => entry.ArtistSongId == joinId);
+      _db.ArtistSongs.Remove(joinEntry);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
