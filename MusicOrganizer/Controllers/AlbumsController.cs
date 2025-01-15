@@ -43,5 +43,19 @@ namespace MusicOrganizer.Controllers
         .FirstOrDefault(album => album.AlbumId == id);
       return View(thisAlbum);
     }
+
+    public ActionResult Edit(int id)
+    {
+      Album thisAlbum = _db.Albums.FirstOrDefault(album => album.AlbumId == id);
+      return View(thisAlbum);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Album album)
+    {
+      _db.Albums.Update(album);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
