@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using MusicOrganizer.Models;
 
@@ -12,11 +13,18 @@ namespace MusicOrganizer
 
       builder.Services.AddControllersWithViews();
 
-      DBConfiguration.ConnectionString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+      builder.Services.AddDbContext<MusicOrganizerContext>(
+        dbContextOptions => dbContextOptions
+          .UseMySql(
+            builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
+            )
+          )
+      );
 
       WebApplication app = builder.Build();
 
       app.UseHttpsRedirection();
+      app.UseStaticFiles();
 
       app.UseRouting();
 
