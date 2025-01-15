@@ -33,5 +33,15 @@ namespace MusicOrganizer.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Details(int id)
+    {
+      Album thisAlbum = _db.Albums
+        .Include(album => album.Songs)
+        .ThenInclude(song => song.JoinEntities)
+        .ThenInclude(join => join.Artist)
+        .FirstOrDefault(album => album.AlbumId == id);
+      return View(thisAlbum);
+    }
   }
 }
