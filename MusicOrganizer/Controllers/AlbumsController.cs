@@ -20,5 +20,18 @@ namespace MusicOrganizer.Controllers
       List<Album> model = _db.Albums.ToList();
       return View(model);
     }
+
+    public ActionResult Create()
+    {
+      return View();
+    }
+
+    [HttpPost]
+    public ActionResult Create(Album album)
+    {
+      _db.Albums.Add(album);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
