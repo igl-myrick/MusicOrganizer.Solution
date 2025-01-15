@@ -57,5 +57,20 @@ namespace MusicOrganizer.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+    public ActionResult Delete(int id)
+    {
+      Album thisAlbum = _db.Albums.FirstOrDefault(album => album.AlbumId == id);
+      return View(thisAlbum);
+    }
+
+    [HttpPost, ActionName("Delete")]
+    public ActionResult DeleteConfirmed(int id)
+    {
+      Album thisAlbum = _db.Albums.FirstOrDefault(album => album.AlbumId == id);
+      _db.Albums.Remove(thisAlbum);
+      _db.SaveChanges();
+      return RedirectToAction("Index");
+    }
   }
 }
