@@ -6,6 +6,6 @@ namespace MusicOrganizer.Models
   {
     public int AlbumId { get; set; }
     public string Title { get; set; }
-    public List<Record> Records { get; set; }
+    public List<Song> Songs { get; set; }
   }
 }
