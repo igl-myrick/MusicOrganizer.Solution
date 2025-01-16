@@ -2,6 +2,49 @@
   Layout = "_Layout";
 }
 
-<h1>Music Organizer</h1>
-<h3><a href="/artists/new">Add a new artist</a></h3>
-<h3><a href="/artists">View all artists</a></h3>
+@using MusicOrganizer.Models;
+
+<div class="container">
+  <div class="row">
+    <h1 class="text-center my-3">Music Organizer</h1>
+    <div class="col-md-4">
+      <div id="songs-wrapper" class="border rounded p-2">
+        <h4>Songs</h4>
+        @if (Model["songs"].Length == 0)
+        {
+          <p>No songs have been added yet.</p>
+        }
+        <ul>
+          @foreach (Song song in Model["songs"])
+          {
+            <li>@Html.ActionLink(song.Title, "Details", "Songs", new { id = song.SongId })</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div id="artists-wrapper" class="border rounded p-2">
+        <h4>Artists</h4>
+        @if (Model["albums"].Length == 0)
+        {
+          <p>No albums have been added yet.</p>
+        }
+        <ul>
+          @foreach (Album album in Model["albums"])
+          {
+            <li>@Html.ActionLink(album.Title, "Details", "Albums", new { id = album.AlbumId })</li>
+          }
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div id="links-wrapper" class="border rounded p-2">
+        <p>@Html.ActionLink("See all songs", "Index", "Songs")</p>
+        <p>@Html.ActionLink("See all albums", "Index", "Albums")</p>
+        <p>@Html.ActionLink("See all artists", "Index", "Artists")</p>
+      </div>
+    </div>
+  </div>
+</div>
