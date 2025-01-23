@@ -13,8 +13,9 @@
   @Html.HiddenFor(model => model.SongId)
   
   @Html.LabelFor(model => model.Title)
-  @Html.TextBoxFor(model => model.Title, new { required = "required" })
-
+  @Html.EditorFor(model => model.Title)
+  <p>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
+  
   @Html.LabelFor(model => model.Album)
   @Html.DropDownList("AlbumId")
 
