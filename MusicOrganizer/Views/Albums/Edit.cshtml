@@ -14,6 +14,7 @@
 
   @Html.LabelFor(model => model.Title)
   @Html.EditorFor(model => model.Title)
+  <p>@Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
   
   <input type="submit" value="Save">
 }
