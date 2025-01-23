@@ -11,10 +11,12 @@
   <h3>No artists have been added yet.</h3>
 }
 
-@foreach (Artist artist in Model)
-{
-  <li>@Html.ActionLink($"{artist.Name}", "Details", new { id = artist.ArtistId })</li>
-}
+<ul>
+  @foreach (Artist artist in Model)
+  {
+    <li>@Html.ActionLink($"{artist.Name}", "Details", new { id = artist.ArtistId })</li>
+  }
+</ul>
 
 <p>@Html.ActionLink("Add new artist", "Create")</p>
 <p>@Html.ActionLink("Home", "Index", "Home")</p>
