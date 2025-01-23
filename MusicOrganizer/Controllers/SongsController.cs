@@ -66,6 +66,11 @@ namespace MusicOrganizer.Controllers
     [HttpPost]
     public ActionResult Edit(Song song)
     {
+      if (!ModelState.IsValid)
+      {
+        ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Title");
+        return View(song);
+      }
       _db.Songs.Update(song);
       _db.SaveChanges();
       return RedirectToAction("Index");
