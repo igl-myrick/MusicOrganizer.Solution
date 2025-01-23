@@ -38,6 +38,10 @@ namespace MusicOrganizer.Controllers
     [HttpPost]
     public ActionResult Create(Artist artist)
     {
+      if (!ModelState.IsValid)
+      {
+        return View(artist);
+      }
       _db.Artists.Add(artist);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -73,6 +77,10 @@ namespace MusicOrganizer.Controllers
     [HttpPost]
     public ActionResult Edit(Artist artist)
     {
+      if (!ModelState.IsValid)
+      {
+        return View(artist);
+      }
       _db.Artists.Update(artist);
       _db.SaveChanges();
       return RedirectToAction("Index");
