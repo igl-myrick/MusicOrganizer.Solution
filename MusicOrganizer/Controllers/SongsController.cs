@@ -27,6 +27,7 @@ namespace MusicOrganizer.Controllers
     public ActionResult Create()
     {
       ViewBag.AlbumId = new SelectList(_db.Albums, "AlbumId", "Title");
+      ViewBag.ArtistId = new SelectList(_db.Artists, "ArtistId", "Name");
       return View();
     }
 
