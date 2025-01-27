@@ -16,6 +16,9 @@
   @Html.DropDownList("AlbumId")
   <p>@Html.ValidationMessageFor(model => model.AlbumId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
+  @Html.Label("Select artist")
+  @Html.DropDownList("ArtistId")
+
   <input type="submit" value="Add new song" class="btn btn-default">
 }
 <p>@Html.ActionLink("Show all songs", "Index")</p>
