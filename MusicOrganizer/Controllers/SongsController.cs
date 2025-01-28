@@ -32,7 +32,7 @@ namespace MusicOrganizer.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Song song)
+    public ActionResult Create(Song song, int artistId)
     {
       if (!ModelState.IsValid)
       {
@@ -43,6 +43,14 @@ namespace MusicOrganizer.Controllers
       {
         _db.Songs.Add(song);
         _db.SaveChanges();
+        #nullable enable
+        ArtistSong? joinEntity = _db.ArtistSongs.FirstOrDefault(join => (join.ArtistId == artistId && join.SongId == song.SongId));
+        #nullable disable
+        if (joinEntity == null && artistId != 0)
+        {
+          _db.ArtistSongs.Add(new ArtistSong() { ArtistId = artistId, SongId = song.SongId });
+          _db.SaveChanges();
+        }
         return RedirectToAction("Index");
       }
     }
