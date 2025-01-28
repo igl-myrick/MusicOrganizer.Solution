@@ -19,7 +19,7 @@ else
   <ul>
     @foreach (ArtistSong join in Model.JoinEntities)
     {
-      <li>@join.Song.Title</li>
+      <li>@Html.ActionLink($"{join.Song.Title}", "Details", "Songs", new { id = join.SongId })</li>
       @using (Html.BeginForm("DeleteJoin", "Artists"))
       {
         @Html.Hidden("joinId", @join.ArtistSongId)
