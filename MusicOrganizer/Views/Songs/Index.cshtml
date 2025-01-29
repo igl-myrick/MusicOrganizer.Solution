@@ -15,7 +15,7 @@ else
   <ul>
     @foreach (Song song in Model)
     {
-      <li>@Html.ActionLink($"{song.Title}", "Details", new { id = song.SongId }) | Album: @song.Album.Title</li>
+      <li>@Html.ActionLink($"{song.Title}", "Details", new { id = song.SongId }) | Album: @Html.ActionLink($"{song.Album.Title}", "Details", "Albums", new { id = song.AlbumId })</li>
     }
   </ul>
 }
